@@ -46,6 +46,11 @@
         font-weight: 700;
       }
 
+      /* Container */
+      .container {
+        max-width: 1280px;
+      }
+
       /* Unique asymmetric cards */
       .asymmetric-card {
         background: white;
@@ -470,6 +475,120 @@
         font-weight: 700;
         transition: all 0.3s ease;
       }
+
+      /* Responsive breakpoints */
+      @media (max-width: 768px) {
+        .hero-split {
+          padding: 6rem 0 4rem;
+        }
+
+        .hero-split h1 {
+          font-size: 3rem;
+        }
+
+        .hero-split::after {
+          width: 100%;
+          clip-path: none;
+          opacity: 0.1;
+        }
+
+        .hero-split img {
+          width: 180px;
+          height: 180px;
+        }
+
+        .py-24 {
+          padding-top: 4rem;
+          padding-bottom: 4rem;
+        }
+
+        .diagonal-section {
+          padding: 4rem 0;
+        }
+
+        .section-header {
+          font-size: 2rem;
+        }
+
+        .asymmetric-card {
+          padding: 1.5rem;
+        }
+
+        .grid.md\:grid-cols-3 {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .btn-brutal {
+          padding: 12px 24px;
+          font-size: 0.875rem;
+          width: 100%;
+          text-align: center;
+        }
+
+        .tag-unique {
+          font-size: 0.75rem;
+          padding: 6px 12px;
+        }
+
+        .icon-unique {
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
+        }
+
+        .timeline-unique {
+          padding-left: 40px;
+        }
+
+        .timeline-unique::before {
+          left: 12px;
+        }
+
+        .timeline-dot-unique {
+          left: 4px;
+        }
+
+        .impact-number {
+          font-size: 2rem;
+        }
+
+        .project-geo {
+          padding: 1.5rem;
+        }
+
+        .lang-badge {
+          padding: 12px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-split h1 {
+          font-size: 2.5rem;
+        }
+
+        .section-header {
+          font-size: 1.75rem;
+        }
+
+        .asymmetric-card h3 {
+          font-size: 1.5rem;
+        }
+
+        .grid.lg\:grid-cols-2,
+        .grid.md\:grid-cols-2,
+        .grid.lg\:grid-cols-3,
+        .grid.lg\:grid-cols-4 {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
@@ -481,10 +600,13 @@
         class="container mx-auto px-6 py-4 flex justify-between items-center"
       >
         <a href="#home" class="text-2xl font-bold text-white">
-          <span class="text-electric">N</span>awel
-          <span class="text-coral">B</span>ellil
+          <span style="color: var(--electric)">N</span>awel
+          <span style="color: var(--coral)">B</span>ellil
         </a>
-        <div class="hidden md:flex space-x-8">
+        <button id="mobileMenuBtn" class="md:hidden text-white text-2xl">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div id="navLinks" class="hidden md:flex space-x-8">
           <a href="#home" class="nav-link text-white">Home</a>
           <a href="#about" class="nav-link text-white">About</a>
           <a href="#experience" class="nav-link text-white">Experience</a>
@@ -493,6 +615,23 @@
           <a href="#skills" class="nav-link text-white">Skills</a>
           <a href="#community" class="nav-link text-white">Community</a>
           <a href="#contact" class="nav-link text-white">Contact</a>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden border-t-2"
+        style="background: var(--slate); border-color: var(--electric)"
+      >
+        <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+          <a href="#home" class="text-white font-semibold">Home</a>
+          <a href="#about" class="text-white font-semibold">About</a>
+          <a href="#experience" class="text-white font-semibold">Experience</a>
+          <a href="#projects" class="text-white font-semibold">Projects</a>
+          <a href="#education" class="text-white font-semibold">Education</a>
+          <a href="#skills" class="text-white font-semibold">Skills</a>
+          <a href="#community" class="text-white font-semibold">Community</a>
+          <a href="#contact" class="text-white font-semibold">Contact</a>
         </div>
       </div>
     </nav>
@@ -509,7 +648,7 @@
               <img
                 src="picture.jpg"
                 alt="Nawel Bellil"
-                class="w-56 h-56 object-cover border-8 border-electric animate-pulse-border"
+                class="w-56 h-56 object-cover border-8 animate-pulse-border"
                 style="
                   clip-path: polygon(
                     30% 0%,
@@ -521,6 +660,7 @@
                     0% 70%,
                     0% 30%
                   );
+                  border-color: var(--electric);
                 "
               />
             </div>
@@ -670,7 +810,7 @@
           </ul>
         </div>
 
-        <!-- Mizaniya Pay -->
+        <!-- Fintech -->
         <div class="max-w-5xl mx-auto mb-16 asymmetric-card">
           <div
             class="flex flex-col md:flex-row justify-between items-start mb-6"
@@ -842,7 +982,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">AI Surveillance System</h3>
             <p class="mb-4 text-sm">
-              Motion/face recognition. NEST Hackathon with real-time detection.
+              Motion/face recognition. NEST Hackathon winner with real-time detection.
             </p>
             <a
               href="https://github.com/Nawel-Bellil/AI-surveillance-system"
@@ -1034,7 +1174,7 @@
               </div>
             </div>
             <div class="space-y-6">
-              <div class="relative timeline-unique">
+              <div class="relative timeline-unique timeline-item">
                 <div class="timeline-dot-unique"></div>
                 <h4 class="font-bold text-lg mb-1">
                   FikrSight • E-Learning Platform
@@ -1051,12 +1191,12 @@
                   <span class="tag-unique">EdTech</span>
                 </div>
               </div>
-              <div class="relative timeline-unique">
+              <div class="relative timeline-unique timeline-item">
                 <div class="timeline-dot-unique"></div>
                 <h4 class="font-bold text-lg mb-1">
-                  Cryptographic Security Protocol
+                  Advanced Cryptographic Security Protocol
                 </h4>
-                <p class="text-sm opacity-75 mb-2">2025</p>
+                <p class="text-sm opacity-75 mb-2">2024</p>
                 <p class="text-sm mb-3">
                   Designed enhanced secure channel with AES-GCM,
                   ChaCha20-Poly1305, ECC/ECDH for key exchange, SHA-256/HKDF for
@@ -1065,16 +1205,16 @@
                 </p>
                 <div class="flex flex-wrap gap-2">
                   <span class="tag-unique">AES-GCM</span>
-                  <span class="tag-unique">Protocol Design</span>
                   <span class="tag-unique">ECC/ECDH</span>
+                  <span class="tag-unique">Protocol Design</span>
                 </div>
               </div>
-              <div class="relative timeline-unique">
+              <div class="relative timeline-unique timeline-item">
                 <div class="timeline-dot-unique"></div>
                 <h4 class="font-bold text-lg mb-1">
                   Queueing Systems Simulation
                 </h4>
-                <p class="text-sm opacity-75 mb-2">2025</p>
+                <p class="text-sm opacity-75 mb-2">2024</p>
                 <p class="text-sm mb-3">
                   Simulated M/M/1 models validating Little's Law with <5% error
                   margin.
@@ -1154,6 +1294,10 @@
                   >
                     <i class="fas fa-trophy" style="color: var(--electric)"></i>
                   </div>
+                  <div>
+                    <h4 class="font-bold">Hackathon Winner</h4>
+                    <p class="text-sm">NEST 2024 • AI Surveillance System (1st Place)</p>
+                  </div>
                 </div>
                 <div class="flex items-start">
                   <div
@@ -1172,8 +1316,8 @@
                   <div>
                     <h4 class="font-bold">Event Organizer</h4>
                     <p class="text-sm">
-                      organizer in Educktech 2024; attended CTO Forum, ICT DAS,
-                      AI Summit, S2EE-16, Engineers Gala...
+                      Organizer in Educktech 2024; attended CTO Forum, ICT DAS,
+                      AI Summit, S2EE-16, Engineers Gala
                     </p>
                   </div>
                 </div>
@@ -1291,7 +1435,29 @@
       };
 
       window.addEventListener("scroll", revealOnScroll);
-      revealOnScroll(); // Initial check
+      revealOnScroll();
+
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        const icon = mobileMenuBtn.querySelector("i");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+      });
+
+      // Close mobile menu when link is clicked
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+          const icon = mobileMenuBtn.querySelector("i");
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        });
+      });
     </script>
   </body>
 </html>
