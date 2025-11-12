@@ -1,942 +1,1297 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nawel Bellil - AI & Product Engineer</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --electric: #00F0FF;
-            --coral: #FF6B9D;
-            --deep: #0A0E27;
-            --slate: #1A1F3A;
-            --cream: #FFFEF2;
-            --mist: #E8E9F3;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Space Grotesk', sans-serif; 
-            background: var(--cream);
-            color: var(--deep);
-            overflow-x: hidden;
-        }
-        
-        h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 700; }
-        
-        /* Unique asymmetric cards */
-        .asymmetric-card {
-            background: white;
-            border-radius: 40px 8px 40px 8px;
-            border: 2px solid var(--deep);
-            padding: 2.5rem;
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .asymmetric-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, var(--electric), var(--coral));
-            border-radius: 40px 8px 40px 8px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .asymmetric-card:hover::before { opacity: 1; }
-        .asymmetric-card:hover { 
-            transform: translateY(-12px) rotate(-1deg);
-            border-color: transparent;
-        }
-        
-        /* Brutalist nav */
-        .nav-brutalist {
-            background: var(--deep);
-            border-bottom: 4px solid var(--electric);
-            box-shadow: 0 8px 0 var(--coral);
-        }
-        
-        .nav-link {
-            position: relative;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-        
-        .nav-link::before {
-            content: '→';
-            position: absolute;
-            left: -20px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            color: var(--electric);
-        }
-        
-        .nav-link:hover::before {
-            left: -16px;
-            opacity: 1;
-        }
-        
-        /* Hero with split screen effect */
-        .hero-split {
-            background: var(--deep);
-            position: relative;
-            min-height: 100vh;
-        }
-        
-        .hero-split::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 45%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--electric) 0%, var(--coral) 100%);
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-            opacity: 0.15;
-        }
-        
-        /* Animated gradient text */
-        .gradient-flow {
-            background: linear-gradient(90deg, var(--electric), var(--coral), var(--electric));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease infinite;
-        }
-        
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% center; }
-            50% { background-position: 100% center; }
-        }
-        
-        /* Unique tag design */
-        .tag-unique {
-            background: var(--deep);
-            color: var(--electric);
-            padding: 8px 20px;
-            border-radius: 0 16px 0 16px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-            border: 2px solid var(--electric);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .tag-unique:hover {
-            background: var(--electric);
-            color: var(--deep);
-            transform: skewX(-5deg) translateY(-3px);
-        }
-        
-        /* Neo-brutalist buttons */
-        .btn-brutal {
-            background: var(--electric);
-            color: var(--deep);
-            padding: 16px 32px;
-            border-radius: 0;
-            font-weight: 700;
-            border: 3px solid var(--deep);
-            box-shadow: 6px 6px 0 var(--deep);
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .btn-brutal:hover {
-            transform: translate(3px, 3px);
-            box-shadow: 3px 3px 0 var(--deep);
-        }
-        
-        .btn-brutal-outline {
-            background: transparent;
-            color: var(--cream);
-            border: 3px solid var(--cream);
-            box-shadow: 6px 6px 0 var(--cream);
-        }
-        
-        .btn-brutal-outline:hover {
-            background: var(--cream);
-            color: var(--deep);
-        }
-        
-        /* Diagonal sections */
-        .diagonal-section {
-            position: relative;
-            padding: 8rem 0;
-        }
-        
-        .diagonal-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: var(--mist);
-            transform: skewY(-2deg);
-            transform-origin: top left;
-            z-index: -1;
-        }
-        
-        /* Impact numbers with unique styling */
-        .impact-brutal {
-            background: var(--deep);
-            color: var(--electric);
-            border: 3px solid var(--electric);
-            border-radius: 0 24px 0 24px;
-            padding: 24px;
-            text-align: center;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .impact-brutal::after {
-            content: '';
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            width: 100%;
-            height: 100%;
-            border: 3px solid var(--coral);
-            border-radius: 0 24px 0 24px;
-            z-index: -1;
-            transition: all 0.3s ease;
-        }
-        
-        .impact-brutal:hover {
-            transform: translate(-3px, -3px);
-        }
-        
-        .impact-brutal:hover::after {
-            top: 6px;
-            right: 6px;
-        }
-        
-        .impact-number {
-            font-size: 3rem;
-            font-weight: 800;
-            font-family: 'Syne', sans-serif;
-            color: var(--electric);
-        }
-        
-        /* Project cards with unique geometry */
-        .project-geo {
-            background: white;
-            border: 3px solid var(--deep);
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
-            padding: 2rem;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-        
-        .project-geo::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 40px;
-            height: 40px;
-            background: var(--electric);
-            clip-path: polygon(100% 0, 100% 100%, 0 100%);
-        }
-        
-        .project-geo:hover {
-            transform: translateX(-8px) translateY(-8px);
-            box-shadow: 8px 8px 0 var(--coral);
-        }
-        
-        /* Timeline with unique connectors */
-        .timeline-unique {
-            position: relative;
-            padding-left: 60px;
-        }
-        
-        .timeline-unique::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: repeating-linear-gradient(
-                0deg,
-                var(--electric) 0px,
-                var(--electric) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-        }
-        
-        .timeline-dot-unique {
-            width: 24px;
-            height: 24px;
-            background: var(--coral);
-            border: 4px solid var(--deep);
-            position: absolute;
-            left: 8px;
-            top: 8px;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            transition: all 0.3s ease;
-        }
-        
-        .timeline-item:hover .timeline-dot-unique {
-            transform: rotate(45deg) scale(1.2);
-            background: var(--electric);
-        }
-        
-        /* Scroll indicator */
-        .scroll-brutal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--electric), var(--coral));
-            z-index: 1000;
-            box-shadow: 0 0 10px var(--electric);
-        }
-        
-        /* Section headers */
-        .section-header {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 1rem;
-        }
-        
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60%;
-            height: 6px;
-            background: var(--electric);
-        }
-        
-        .section-header::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 60%;
-            width: 40%;
-            height: 6px;
-            background: var(--coral);
-        }
-        
-        /* Icon circles with unique design */
-        .icon-unique {
-            width: 80px;
-            height: 80px;
-            background: var(--deep);
-            border: 4px solid var(--electric);
-            border-radius: 0 50% 0 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--electric);
-            font-size: 2rem;
-            transition: all 0.4s ease;
-        }
-        
-        .icon-unique:hover {
-            border-radius: 50% 0 50% 0;
-            transform: rotate(180deg);
-            background: var(--electric);
-            color: var(--deep);
-        }
-        
-        /* Animations */
-        @keyframes float-unique {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes pulse-border {
-            0%, 100% { border-color: var(--electric); }
-            50% { border-color: var(--coral); }
-        }
-        
-        .animate-float-unique { animation: float-unique 6s ease-in-out infinite; }
-        .animate-pulse-border { animation: pulse-border 2s ease-in-out infinite; }
-        
-        /* Reveal animation */
-        .reveal { 
-            opacity: 0; 
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .reveal.active { 
-            opacity: 1; 
-            transform: translateY(0);
-        }
-        
-        /* Language badges */
-        .lang-badge {
-            background: var(--deep);
-            border: 3px solid var(--electric);
-            padding: 16px;
-            text-align: center;
-            position: relative;
-            clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
-            transition: all 0.3s ease;
-        }
-        
-        .lang-badge:hover {
-            background: var(--electric);
-            border-color: var(--coral);
-        }
-        
-        .lang-badge:hover .lang-text {
-            color: var(--deep);
-        }
-        
-        .lang-text {
-            color: var(--electric);
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-    </style>
-</head>
-<body>
+      :root {
+        --electric: #00f0ff;
+        --coral: #ff6b9d;
+        --deep: #0a0e27;
+        --slate: #1a1f3a;
+        --cream: #fffef2;
+        --mist: #e8e9f3;
+      }
 
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Space Grotesk", sans-serif;
+        background: var(--cream);
+        color: var(--deep);
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+      }
+
+      /* Unique asymmetric cards */
+      .asymmetric-card {
+        background: white;
+        border-radius: 40px 8px 40px 8px;
+        border: 2px solid var(--deep);
+        padding: 2.5rem;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .asymmetric-card::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(135deg, var(--electric), var(--coral));
+        border-radius: 40px 8px 40px 8px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .asymmetric-card:hover::before {
+        opacity: 1;
+      }
+      .asymmetric-card:hover {
+        transform: translateY(-12px) rotate(-1deg);
+        border-color: transparent;
+      }
+
+      /* Brutalist nav */
+      .nav-brutalist {
+        background: var(--deep);
+        border-bottom: 4px solid var(--electric);
+        box-shadow: 0 8px 0 var(--coral);
+      }
+
+      .nav-link {
+        position: relative;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .nav-link::before {
+        content: "→";
+        position: absolute;
+        left: -20px;
+        opacity: 0;
+        transition: all 0.3s ease;
+        color: var(--electric);
+      }
+
+      .nav-link:hover::before {
+        left: -16px;
+        opacity: 1;
+      }
+
+      /* Hero with split screen effect */
+      .hero-split {
+        background: var(--deep);
+        position: relative;
+        min-height: 100vh;
+      }
+
+      .hero-split::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--electric) 0%,
+          var(--coral) 100%
+        );
+        clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+        opacity: 0.15;
+      }
+
+      /* Animated gradient text */
+      .gradient-flow {
+        background: linear-gradient(
+          90deg,
+          var(--electric),
+          var(--coral),
+          var(--electric)
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease infinite;
+      }
+
+      @keyframes gradient-shift {
+        0%,
+        100% {
+          background-position: 0% center;
+        }
+        50% {
+          background-position: 100% center;
+        }
+      }
+
+      /* Unique tag design */
+      .tag-unique {
+        background: var(--deep);
+        color: var(--electric);
+        padding: 8px 20px;
+        border-radius: 0 16px 0 16px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-block;
+        border: 2px solid var(--electric);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .tag-unique:hover {
+        background: var(--electric);
+        color: var(--deep);
+        transform: skewX(-5deg) translateY(-3px);
+      }
+
+      /* Neo-brutalist buttons */
+      .btn-brutal {
+        background: var(--electric);
+        color: var(--deep);
+        padding: 16px 32px;
+        border-radius: 0;
+        font-weight: 700;
+        border: 3px solid var(--deep);
+        box-shadow: 6px 6px 0 var(--deep);
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .btn-brutal:hover {
+        transform: translate(3px, 3px);
+        box-shadow: 3px 3px 0 var(--deep);
+      }
+
+      .btn-brutal-outline {
+        background: transparent;
+        color: var(--cream);
+        border: 3px solid var(--cream);
+        box-shadow: 6px 6px 0 var(--cream);
+      }
+
+      .btn-brutal-outline:hover {
+        background: var(--cream);
+        color: var(--deep);
+      }
+
+      /* Diagonal sections */
+      .diagonal-section {
+        position: relative;
+        padding: 8rem 0;
+      }
+
+      .diagonal-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: var(--mist);
+        transform: skewY(-2deg);
+        transform-origin: top left;
+        z-index: -1;
+      }
+
+      /* Impact numbers with unique styling */
+      .impact-brutal {
+        background: var(--deep);
+        color: var(--electric);
+        border: 3px solid var(--electric);
+        border-radius: 0 24px 0 24px;
+        padding: 24px;
+        text-align: center;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .impact-brutal::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        width: 100%;
+        height: 100%;
+        border: 3px solid var(--coral);
+        border-radius: 0 24px 0 24px;
+        z-index: -1;
+        transition: all 0.3s ease;
+      }
+
+      .impact-brutal:hover {
+        transform: translate(-3px, -3px);
+      }
+
+      .impact-brutal:hover::after {
+        top: 6px;
+        right: 6px;
+      }
+
+      .impact-number {
+        font-size: 3rem;
+        font-weight: 800;
+        font-family: "Syne", sans-serif;
+        color: var(--electric);
+      }
+
+      /* Project cards with unique geometry */
+      .project-geo {
+        background: white;
+        border: 3px solid var(--deep);
+        clip-path: polygon(
+          0 0,
+          100% 0,
+          100% calc(100% - 40px),
+          calc(100% - 40px) 100%,
+          0 100%
+        );
+        padding: 2rem;
+        transition: all 0.4s ease;
+        position: relative;
+      }
+
+      .project-geo::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        background: var(--electric);
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      }
+
+      .project-geo:hover {
+        transform: translateX(-8px) translateY(-8px);
+        box-shadow: 8px 8px 0 var(--coral);
+      }
+
+      /* Timeline with unique connectors */
+      .timeline-unique {
+        position: relative;
+        padding-left: 60px;
+      }
+
+      .timeline-unique::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: repeating-linear-gradient(
+          0deg,
+          var(--electric) 0px,
+          var(--electric) 10px,
+          transparent 10px,
+          transparent 20px
+        );
+      }
+
+      .timeline-dot-unique {
+        width: 24px;
+        height: 24px;
+        background: var(--coral);
+        border: 4px solid var(--deep);
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        transition: all 0.3s ease;
+      }
+
+      .timeline-item:hover .timeline-dot-unique {
+        transform: rotate(45deg) scale(1.2);
+        background: var(--electric);
+      }
+
+      /* Scroll indicator */
+      .scroll-brutal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 6px;
+        background: linear-gradient(90deg, var(--electric), var(--coral));
+        z-index: 1000;
+        box-shadow: 0 0 10px var(--electric);
+      }
+
+      /* Section headers */
+      .section-header {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 1rem;
+      }
+
+      .section-header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60%;
+        height: 6px;
+        background: var(--electric);
+      }
+
+      .section-header::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 60%;
+        width: 40%;
+        height: 6px;
+        background: var(--coral);
+      }
+
+      /* Icon circles with unique design */
+      .icon-unique {
+        width: 80px;
+        height: 80px;
+        background: var(--deep);
+        border: 4px solid var(--electric);
+        border-radius: 0 50% 0 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--electric);
+        font-size: 2rem;
+        transition: all 0.4s ease;
+      }
+
+      .icon-unique:hover {
+        border-radius: 50% 0 50% 0;
+        transform: rotate(180deg);
+        background: var(--electric);
+        color: var(--deep);
+      }
+
+      /* Animations */
+      @keyframes float-unique {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+
+      @keyframes pulse-border {
+        0%,
+        100% {
+          border-color: var(--electric);
+        }
+        50% {
+          border-color: var(--coral);
+        }
+      }
+
+      .animate-float-unique {
+        animation: float-unique 6s ease-in-out infinite;
+      }
+      .animate-pulse-border {
+        animation: pulse-border 2s ease-in-out infinite;
+      }
+
+      /* Reveal animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Language badges */
+      .lang-badge {
+        background: var(--deep);
+        border: 3px solid var(--electric);
+        padding: 16px;
+        text-align: center;
+        position: relative;
+        clip-path: polygon(
+          10% 0%,
+          90% 0%,
+          100% 10%,
+          100% 90%,
+          90% 100%,
+          10% 100%,
+          0% 90%,
+          0% 10%
+        );
+        transition: all 0.3s ease;
+      }
+
+      .lang-badge:hover {
+        background: var(--electric);
+        border-color: var(--coral);
+      }
+
+      .lang-badge:hover .lang-text {
+        color: var(--deep);
+      }
+
+      .lang-text {
+        color: var(--electric);
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
     <div class="scroll-brutal" id="scrollIndicator"></div>
 
     <!-- Navigation -->
     <nav class="nav-brutalist fixed top-0 w-full z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-white">
-                <span class="text-electric">N</span>awel <span class="text-coral">B</span>ellil
-            </a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link text-white">Home</a>
-                <a href="#about" class="nav-link text-white">About</a>
-                <a href="#experience" class="nav-link text-white">Experience</a>
-                <a href="#projects" class="nav-link text-white">Projects</a>
-                <a href="#education" class="nav-link text-white">Education</a>
-                <a href="#skills" class="nav-link text-white">Skills</a>
-                <a href="#community" class="nav-link text-white">Community</a>
-                <a href="#contact" class="nav-link text-white">Contact</a>
-            </div>
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="#home" class="text-2xl font-bold text-white">
+          <span class="text-electric">N</span>awel
+          <span class="text-coral">B</span>ellil
+        </a>
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="nav-link text-white">Home</a>
+          <a href="#about" class="nav-link text-white">About</a>
+          <a href="#experience" class="nav-link text-white">Experience</a>
+          <a href="#projects" class="nav-link text-white">Projects</a>
+          <a href="#education" class="nav-link text-white">Education</a>
+          <a href="#skills" class="nav-link text-white">Skills</a>
+          <a href="#community" class="nav-link text-white">Community</a>
+          <a href="#contact" class="nav-link text-white">Contact</a>
         </div>
+      </div>
     </nav>
 
     <!-- Hero -->
-    <section id="home" class="hero-split flex items-center justify-center relative">
-        <div class="container mx-auto px-6 py-32 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-white">
-                    <div class="animate-float-unique mb-8">
-                        <img src="picture.jpg" alt="Nawel Bellil" class="w-56 h-56 object-cover border-8 border-electric animate-pulse-border" style="clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);">
-                    </div>
-                    <h1 class="text-6xl md:text-8xl font-black mb-4">
-                        Nawel<br/>
-                        <span class="gradient-flow">Bellil</span>
-                    </h1>
-                    <p class="text-2xl mb-6 font-semibold" style="color: var(--electric);">AI × Product × Impact</p>
-                    <p class="text-lg mb-4 opacity-90">
-                        4th-year Computer Security Engineer at USTHB
-                    </p>
-                    <p class="text-base mb-8 opacity-75">
-                        Building intelligent, secure, and scalable systems<br/>
-                        Fintech • AI Automation • Cybersecurity • Remote-Ready
-                    </p>
-                    <div class="flex gap-4 flex-wrap">
-                        <a href="#projects" class="btn-brutal">
-                            View Projects
-                        </a>
-                        <a href="#contact" class="btn-brutal btn-brutal-outline">
-                            Get in Touch
-                        </a>
-                    </div>
-                    <div class="flex gap-6 mt-8 text-sm">
-                        <span><i class="fas fa-map-marker-alt mr-2"></i> Alger, Algeria</span>
-                        <span><i class="fas fa-globe mr-2"></i> Open to Remote</span>
-                    </div>
-                </div>
-                <div class="hidden md:block"></div>
+    <section
+      id="home"
+      class="hero-split flex items-center justify-center relative"
+    >
+      <div class="container mx-auto px-6 py-32 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="text-white">
+            <div class="animate-float-unique mb-8">
+              <img
+                src="picture.jpg"
+                alt="Nawel Bellil"
+                class="w-56 h-56 object-cover border-8 border-electric animate-pulse-border"
+                style="
+                  clip-path: polygon(
+                    30% 0%,
+                    70% 0%,
+                    100% 30%,
+                    100% 70%,
+                    70% 100%,
+                    30% 100%,
+                    0% 70%,
+                    0% 30%
+                  );
+                "
+              />
             </div>
+            <h1 class="text-6xl md:text-8xl font-black mb-4">
+              Nawel<br />
+              <span class="gradient-flow">Bellil</span>
+            </h1>
+            <p
+              class="text-2xl mb-6 font-semibold"
+              style="color: var(--electric)"
+            >
+              AI × Product × Impact
+            </p>
+            <p class="text-lg mb-4 opacity-90">
+              4th-year Computer Security Engineer at USTHB
+            </p>
+            <p class="text-base mb-8 opacity-75">
+              Building intelligent, secure, and scalable systems<br />
+              Fintech • AI Automation • Cybersecurity • Remote-Ready
+            </p>
+            <div class="flex gap-4 flex-wrap">
+              <a href="#projects" class="btn-brutal"> View Projects </a>
+              <a href="#contact" class="btn-brutal btn-brutal-outline">
+                Get in Touch
+              </a>
+            </div>
+            <div class="flex gap-6 mt-8 text-sm">
+              <span
+                ><i class="fas fa-map-marker-alt mr-2"></i> Alger, Algeria</span
+              >
+              <span><i class="fas fa-globe mr-2"></i> Open to Remote</span>
+            </div>
+          </div>
+          <div class="hidden md:block"></div>
         </div>
+      </div>
     </section>
 
     <!-- About -->
     <section id="about" class="py-24 reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black mb-16 text-center">
-                <span class="section-header">About Me</span>
-            </h2>
-            <div class="max-w-4xl mx-auto asymmetric-card">
-                <p class="text-lg leading-relaxed mb-6">
-                    As a 4th-year Computer Security Engineering student at USTHB, I blend technical expertise in AI/ML, backend development, and cybersecurity with strategic product leadership. My hands-on experience includes <strong>optimizing sprint efficiency by 10%</strong> in fintech and building <strong>AI-driven automation systems that reduce routines by 80%</strong>.
-                </p>
-                <p class="text-lg leading-relaxed mb-6">
-                    I'm passionate about creating scalable, secure solutions that drive real impact—whether fine-tuning LLMs for personalized applications or designing cryptographic protocols. My soft skills shine in high-pressure environments: strategic communication, resilient negotiation, extreme prioritization under constraints, rapid learning, autonomy, and adaptability.
-                </p>
-                <p class="text-lg leading-relaxed mb-8">
-                    Beyond tech, I've enhanced my leadership through workshops like <strong>Financial Literacy with World Learning x HIS</strong>, fostering financial acumen and vision for inclusive products. Interests in philosophy and critical thinking fuel my purposeful approach to innovation.
-                </p>
-                <div class="flex flex-wrap gap-3">
-                    <span class="tag-unique">Strategic Communication</span>
-                    <span class="tag-unique">Resilience</span>
-                    <span class="tag-unique">Rapid Learning</span>
-                    <span class="tag-unique">Autonomy</span>
-                    <span class="tag-unique">Adaptability</span>
-                    <span class="tag-unique">Extreme Prioritization</span>
-                </div>
-            </div>
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-black mb-16 text-center">
+          <span class="section-header">About Me</span>
+        </h2>
+        <div class="max-w-4xl mx-auto asymmetric-card">
+          <p class="text-lg leading-relaxed mb-6">
+            As a 4th-year Computer Security Engineering student at USTHB, I
+            blend technical expertise in AI/ML, backend development, and
+            cybersecurity with strategic product leadership. My hands-on
+            experience includes
+            <strong>optimizing sprint efficiency by 10%</strong> in fintech and
+            building
+            <strong
+              >AI-driven automation systems that reduce routines by 80%</strong
+            >.
+          </p>
+          <p class="text-lg leading-relaxed mb-6">
+            I'm passionate about creating scalable, secure solutions that drive
+            real impact—whether fine-tuning LLMs for personalized applications
+            or designing cryptographic protocols. My soft skills shine in
+            high-pressure environments: strategic communication, resilient
+            negotiation, extreme prioritization under constraints, rapid
+            learning, autonomy, and adaptability.
+          </p>
+          <p class="text-lg leading-relaxed mb-8">
+            Beyond tech, I've enhanced my leadership through workshops like
+            <strong>Financial Literacy with World Learning x HIS</strong>,
+            fostering financial acumen and vision for inclusive products.
+            Interests in philosophy and critical thinking fuel my purposeful
+            approach to innovation.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="tag-unique">Strategic Communication</span>
+            <span class="tag-unique">Resilience</span>
+            <span class="tag-unique">Rapid Learning</span>
+            <span class="tag-unique">Autonomy</span>
+            <span class="tag-unique">Adaptability</span>
+            <span class="tag-unique">Extreme Prioritization</span>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Experience -->
     <section id="experience" class="diagonal-section reveal">
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-5xl font-black mb-16 text-center">
-                <span class="section-header">Professional Journey</span>
-            </h2>
-            
-            <!-- SATIM -->
-            <div class="max-w-5xl mx-auto mb-16 asymmetric-card">
-                <div class="flex flex-col md:flex-row justify-between items-start mb-6">
-                    <div>
-                        <h3 class="text-3xl font-bold mb-2">R&D Intern • AI & Automation</h3>
-                        <p class="text-xl font-semibold" style="color: var(--electric);">SATIM • Research & Development</p>
-                    </div>
-                    <span class="tag-unique mt-2 md:mt-0">Nov 2025 – Present</span>
-                </div>
-                <div class="grid md:grid-cols-3 gap-4 mb-6">
-                    <div class="impact-brutal">
-                        <div class="impact-number">80%</div>
-                        <p class="text-sm mt-2" style="color: var(--cream);">Routine Automation</p>
-                    </div>
-                    <div class="impact-brutal">
-                        <div class="impact-number">100%</div>
-                        <p class="text-sm mt-2" style="color: var(--cream);">Test Coverage</p>
-                    </div>
-                    <div class="impact-brutal">
-                        <div class="impact-number">AI+</div>
-                        <p class="text-sm mt-2" style="color: var(--cream);">Intelligent Systems</p>
-                    </div>
-                </div>
-                <ul class="space-y-3">
-                    <li class="flex items-start"><i class="fas fa-robot mr-3 mt-1" style="color: var(--electric);"></i> Building AI-enhanced web scrapers with human-like interaction simulation</li>
-                    <li class="flex items-start"><i class="fas fa-brain mr-3 mt-1" style="color: var(--coral);"></i> Integrating ML models for adaptive, self-improving automation pipelines</li>
-                    <li class="flex items-start"><i class="fas fa-cogs mr-3 mt-1" style="color: var(--electric);"></i> Collaborating on R&D to optimize secure backend infrastructure</li>
-                </ul>
-            </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-5xl font-black mb-16 text-center">
+          <span class="section-header">Professional Journey</span>
+        </h2>
 
-            <!-- Mizaniya Pay -->
-            <div class="max-w-5xl mx-auto mb-16 asymmetric-card">
-                <div class="flex flex-col md:flex-row justify-between items-start mb-6">
-                    <div>
-                        <h3 class="text-3xl font-bold mb-2">Product Owner Intern</h3>
-                        <p class="text-xl font-semibold" style="color: var(--electric);">Fintech Startup • Digital Payments</p>
-                    </div>
-                    <span class="tag-unique mt-2 md:mt-0">Jul – Aug 2025</span>
-                </div>
-                <div class="grid md:grid-cols-3 gap-4 mb-6">
-                    <div class="impact-brutal">
-                        <div class="impact-number">5+</div>
-                        <p class="text-sm mt-2" style="color: var(--cream);">User Stories</p>
-                    </div>
-                    <div class="impact-brutal">
-                        <div class="impact-number">+10%</div>
-                        <p class="text-sm mt-2" style="color: var(--cream);">Sprint Efficiency</p>
-                    </div>
-                    <div class="impact-brutal">
-                        <div class="impact-number">Agile</div>
-                        <p class="text-sm mt-2" style="color: var(--cream);">Methodology</p>
-                    </div>
-                </div>
-                <ul class="space-y-3">
-                    <li class="flex items-start"><i class="fas fa-file-alt mr-3 mt-1" style="color: var(--electric);"></i> Led comprehensive product documentation and feature specification for digital payment platform</li>
-                    <li class="flex items-start"><i class="fas fa-tasks mr-3 mt-1" style="color: var(--coral);"></i> Created standardized user stories and managed backlog prioritization using MoSCoW methodology</li>
-                    <li class="flex items-start"><i class="fas fa-users mr-3 mt-1" style="color: var(--electric);"></i> Participated in strategic meetings focusing on API integration and scalability planning</li>
-                    <li class="flex items-start"><i class="fas fa-bug mr-3 mt-1" style="color: var(--coral);"></i> Conducted functional QA testing and implemented structured bug reporting workflows</li>
-                </ul>
+        <!-- SATIM -->
+        <div class="max-w-5xl mx-auto mb-16 asymmetric-card">
+          <div
+            class="flex flex-col md:flex-row justify-between items-start mb-6"
+          >
+            <div>
+              <h3 class="text-3xl font-bold mb-2">
+                R&D Intern • AI & Automation
+              </h3>
+              <p class="text-xl font-semibold" style="color: var(--electric)">
+                SATIM • Research & Development
+              </p>
             </div>
-
-            <!-- Mobilis -->
-            <div class="max-w-5xl mx-auto asymmetric-card">
-                <div class="flex flex-col md:flex-row justify-between items-start mb-6">
-                    <div>
-                        <h3 class="text-3xl font-bold mb-2">Cloud & AI Intern</h3>
-                        <p class="text-xl font-semibold" style="color: var(--electric);">Mobilis • Telecom Giant</p>
-                    </div>
-                    <span class="tag-unique mt-2 md:mt-0">Early 2025</span>
-                </div>
-                <ul class="space-y-3">
-                    <li class="flex items-start"><i class="fas fa-cloud mr-3 mt-1" style="color: var(--electric);"></i> Contributed to AI-driven cloud projects in telecom infrastructure</li>
-                    <li class="flex items-start"><i class="fas fa-server mr-3 mt-1" style="color: var(--coral);"></i> Focused on integration, scalability, and secure deployments</li>
-                </ul>
+            <span class="tag-unique mt-2 md:mt-0">Nov 2025 – Present</span>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4 mb-6">
+            <div class="impact-brutal">
+              <div class="impact-number">80%</div>
+              <p class="text-sm mt-2" style="color: var(--cream)">
+                Routine Automation
+              </p>
             </div>
+            <div class="impact-brutal">
+              <div class="impact-number">100%</div>
+              <p class="text-sm mt-2" style="color: var(--cream)">
+                Test Coverage
+              </p>
+            </div>
+            <div class="impact-brutal">
+              <div class="impact-number">AI+</div>
+              <p class="text-sm mt-2" style="color: var(--cream)">
+                Intelligent Systems
+              </p>
+            </div>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i
+                class="fas fa-robot mr-3 mt-1"
+                style="color: var(--electric)"
+              ></i>
+              Building AI-enhanced web scrapers with human-like interaction
+              simulation
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-brain mr-3 mt-1" style="color: var(--coral)"></i>
+              Integrating ML models for adaptive, self-improving automation
+              pipelines
+            </li>
+            <li class="flex items-start">
+              <i
+                class="fas fa-cogs mr-3 mt-1"
+                style="color: var(--electric)"
+              ></i>
+              Collaborating on R&D to optimize secure backend infrastructure
+            </li>
+          </ul>
         </div>
+
+        <!-- Mizaniya Pay -->
+        <div class="max-w-5xl mx-auto mb-16 asymmetric-card">
+          <div
+            class="flex flex-col md:flex-row justify-between items-start mb-6"
+          >
+            <div>
+              <h3 class="text-3xl font-bold mb-2">Product Owner Intern</h3>
+              <p class="text-xl font-semibold" style="color: var(--electric)">
+                Fintech Startup • Digital Payments
+              </p>
+            </div>
+            <span class="tag-unique mt-2 md:mt-0">Jul – Aug 2025</span>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4 mb-6">
+            <div class="impact-brutal">
+              <div class="impact-number">5+</div>
+              <p class="text-sm mt-2" style="color: var(--cream)">
+                User Stories
+              </p>
+            </div>
+            <div class="impact-brutal">
+              <div class="impact-number">+10%</div>
+              <p class="text-sm mt-2" style="color: var(--cream)">
+                Sprint Efficiency
+              </p>
+            </div>
+            <div class="impact-brutal">
+              <div class="impact-number">Agile</div>
+              <p class="text-sm mt-2" style="color: var(--cream)">
+                Methodology
+              </p>
+            </div>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i
+                class="fas fa-file-alt mr-3 mt-1"
+                style="color: var(--electric)"
+              ></i>
+              Led comprehensive product documentation and feature specification
+              for digital payment platform
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-tasks mr-3 mt-1" style="color: var(--coral)"></i>
+              Created standardized user stories and managed backlog
+              prioritization using MoSCoW methodology
+            </li>
+            <li class="flex items-start">
+              <i
+                class="fas fa-users mr-3 mt-1"
+                style="color: var(--electric)"
+              ></i>
+              Participated in strategic meetings focusing on API integration and
+              scalability planning
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-bug mr-3 mt-1" style="color: var(--coral)"></i>
+              Conducted functional QA testing and implemented structured bug
+              reporting workflows
+            </li>
+          </ul>
+        </div>
+
+        <!-- Mobilis -->
+        <div class="max-w-5xl mx-auto asymmetric-card">
+          <div
+            class="flex flex-col md:flex-row justify-between items-start mb-6"
+          >
+            <div>
+              <h3 class="text-3xl font-bold mb-2">Cloud & AI Intern</h3>
+              <p class="text-xl font-semibold" style="color: var(--electric)">
+                Mobilis • Telecom Giant
+              </p>
+            </div>
+            <span class="tag-unique mt-2 md:mt-0">Early 2025</span>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i
+                class="fas fa-cloud mr-3 mt-1"
+                style="color: var(--electric)"
+              ></i>
+              Contributed to AI-driven cloud projects in telecom infrastructure
+            </li>
+            <li class="flex items-start">
+              <i
+                class="fas fa-server mr-3 mt-1"
+                style="color: var(--coral)"
+              ></i>
+              Focused on integration, scalability, and secure deployments
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- Projects -->
     <section id="projects" class="py-24 reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black mb-16 text-center">
-                <span class="section-header">Featured Projects</span>
-            </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                <div class="project-geo">
-                    <div class="icon-unique mb-4">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">FikrSight E-Learning</h3>
-                    <p class="mb-4 text-sm">Interactive linear algebra platform. Led as PM with Node.js, Express, Prisma, PostgreSQL.</p>
-                    <a href="https://github.com/Nawel-Bellil/e-learning-back" class="font-bold" style="color: var(--electric);">View on GitHub →</a>
-                </div>
-
-                <div class="project-geo">
-                    <div class="icon-unique mb-4">
-                        <i class="fas fa-qrcode"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Organizers App</h3>
-                    <p class="mb-4 text-sm">Event management with check-in/QR scanning. 7 developers, scalable architecture.</p>
-                    <span class="text-sm opacity-60">Private Repository</span>
-                </div>
-
-                <div class="project-geo">
-                    <div class="icon-unique mb-4">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">AI Travel Assistant</h3>
-                    <p class="mb-4 text-sm">Fine-tuned TinyLlama-1.1B for personalized travel planning with domain-adapted LLM.</p>
-                    <a href="https://github.com/Nawel-Bellil/intelligent-travel-assistant-system-Llama" class="font-bold" style="color: var(--electric);">View on GitHub →</a>
-                </div>
-
-                <div class="project-geo">
-                    <div class="icon-unique mb-4">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">SATIM Call Center AI</h3>
-                    <p class="mb-4 text-sm">Event-driven automation with NLP bots. 100% test coverage, 80% routine automation.</p>
-                    <a href="https://github.com/Nawel-Bellil/SATIM_CallCenter_Automation" class="font-bold" style="color: var(--electric);">View on GitHub →</a>
-                </div>
-
-                <div class="project-geo">
-                    <div class="icon-unique mb-4">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">AI Surveillance System</h3>
-                    <p class="mb-4 text-sm">Motion/face recognition. NEST Hackathon winner with real-time detection.</p>
-                    <a href="https://github.com/Nawel-Bellil/AI-surveillance-system" class="font-bold" style="color: var(--electric);">View on GitHub →</a>
-                </div>
-
-                <div class="project-geo">
-                    <div class="icon-unique mb-4">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Raqeeb Anomaly Detection</h3>
-                    <p class="mb-4 text-sm">ML for cold chain monitoring. <5% error margin, 15% loss reduction.</p>
-                    <a href="https://github.com/Nawel-Bellil/Raqeeb-Anomaly-Detection-in-Cold-Chains-" class="font-bold" style="color: var(--electric);">View on GitHub →</a>
-                </div>
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-black mb-16 text-center">
+          <span class="section-header">Featured Projects</span>
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div class="project-geo">
+            <div class="icon-unique mb-4">
+              <i class="fas fa-graduation-cap"></i>
             </div>
-            <div class="text-center mt-12">
-                <a href="https://github.com/Nawel-Bellil?tab=repositories" class="btn-brutal inline-block">
-                    View All 13 Projects <i class="fas fa-arrow-right ml-2"></i>
-                </a>
+            <h3 class="text-xl font-bold mb-2">FikrSight E-Learning</h3>
+            <p class="mb-4 text-sm">
+              Interactive linear algebra platform. Led as PM with Node.js,
+              Express, Prisma, PostgreSQL.
+            </p>
+            <a
+              href="https://github.com/Nawel-Bellil/e-learning-back"
+              class="font-bold"
+              style="color: var(--electric)"
+              >View on GitHub →</a
+            >
+          </div>
+
+          <div class="project-geo">
+            <div class="icon-unique mb-4">
+              <i class="fas fa-qrcode"></i>
             </div>
+            <h3 class="text-xl font-bold mb-2">Organizers App</h3>
+            <p class="mb-4 text-sm">
+              Event management with check-in/QR scanning. 7 developers, scalable
+              architecture.
+            </p>
+            <span class="text-sm opacity-60">Private Repository</span>
+          </div>
+
+          <div class="project-geo">
+            <div class="icon-unique mb-4">
+              <i class="fas fa-plane"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">AI Travel Assistant</h3>
+            <p class="mb-4 text-sm">
+              Fine-tuned TinyLlama-1.1B for personalized travel planning with
+              domain-adapted LLM.
+            </p>
+            <a
+              href="https://github.com/Nawel-Bellil/intelligent-travel-assistant-system-Llama"
+              class="font-bold"
+              style="color: var(--electric)"
+              >View on GitHub →</a
+            >
+          </div>
+
+          <div class="project-geo">
+            <div class="icon-unique mb-4">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">SATIM Call Center AI</h3>
+            <p class="mb-4 text-sm">
+              Event-driven automation with NLP bots. 100% test coverage, 80%
+              routine automation.
+            </p>
+            <a
+              href="https://github.com/Nawel-Bellil/SATIM_CallCenter_Automation"
+              class="font-bold"
+              style="color: var(--electric)"
+              >View on GitHub →</a
+            >
+          </div>
+
+          <div class="project-geo">
+            <div class="icon-unique mb-4">
+              <i class="fas fa-video"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">AI Surveillance System</h3>
+            <p class="mb-4 text-sm">
+              Motion/face recognition. NEST Hackathon with real-time detection.
+            </p>
+            <a
+              href="https://github.com/Nawel-Bellil/AI-surveillance-system"
+              class="font-bold"
+              style="color: var(--electric)"
+              >View on GitHub →</a
+            >
+          </div>
+
+          <div class="project-geo">
+            <div class="icon-unique mb-4">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Raqeeb Anomaly Detection</h3>
+            <p class="mb-4 text-sm">
+              ML for cold chain monitoring. <5% error margin, 15% loss
+              reduction.
+            </p>
+            <a
+              href="https://github.com/Nawel-Bellil/Raqeeb-Anomaly-Detection-in-Cold-Chains-"
+              class="font-bold"
+              style="color: var(--electric)"
+              >View on GitHub →</a
+            >
+          </div>
         </div>
+        <div class="text-center mt-12">
+          <a
+            href="https://github.com/Nawel-Bellil?tab=repositories"
+            class="btn-brutal inline-block"
+          >
+            View All 13 Projects <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Education -->
     <section id="education" class="diagonal-section reveal">
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-5xl font-black mb-16 text-center">
-                <span class="section-header">Education & Certifications</span>
-            </h2>
-            <div class="max-w-4xl mx-auto space-y-6">
-                <div class="asymmetric-card">
-                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Bachelor of Engineering in Computer Security</h3>
-                            <p class="text-lg font-semibold" style="color: var(--electric);">USTHB • Algiers, Algeria</p>
-                            <p class="text-sm opacity-75">2022 – Present</p>
-                        </div>
-                        <span class="tag-unique mt-2 md:mt-0">Current</span>
-                    </div>
-                    <p><strong>Core:</strong> Cloud Security, Cryptography, Databases, Backend Systems</p>
-                </div>
-
-                <div class="asymmetric-card">
-                    <div class="flex items-start">
-                        <div class="w-4 h-4 mt-2 mr-4 flex-shrink-0" style="background: var(--electric); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold">AI & Deep Learning</h3>
-                            <p class="font-semibold" style="color: var(--electric);">Code 213 • Feb – May 2025</p>
-                            <p class="text-sm mb-2">RNNs, CNNs, NLP, Generative Models</p>
-                            <span class="tag-unique">Certificate Earned</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="asymmetric-card">
-                    <div class="flex items-start">
-                        <div class="w-4 h-4 mt-2 mr-4 flex-shrink-0" style="background: var(--coral); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold">AI & Machine Learning</h3>
-                            <p class="font-semibold" style="color: var(--electric);">Code 213 • Oct 2024 – Feb 2025</p>
-                            <p class="text-sm mb-2">ML Foundations, Scikit-Learn, TensorFlow</p>
-                            <span class="tag-unique">Certificate Earned</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="asymmetric-card">
-                    <div class="flex items-start">
-                        <div class="w-4 h-4 mt-2 mr-4 flex-shrink-0" style="background: var(--electric); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold">Prompt Engineering & Cloud Computing</h3>
-                            <p class="font-semibold" style="color: var(--electric);">Datacamp • Online</p>
-                            <p class="text-sm mb-2">LLM Prompting, AWS/GCP Basics</p>
-                            <span class="tag-unique">Certificate Earned</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-5xl font-black mb-16 text-center">
+          <span class="section-header">Education & Certifications</span>
+        </h2>
+        <div class="max-w-4xl mx-auto space-y-6">
+          <div class="asymmetric-card">
+            <div
+              class="flex flex-col md:flex-row justify-between items-start mb-4"
+            >
+              <div>
+                <h3 class="text-2xl font-bold mb-2">
+                  Bachelor of Engineering in Computer Security
+                </h3>
+                <p class="text-lg font-semibold" style="color: var(--electric)">
+                  USTHB • Algiers, Algeria
+                </p>
+                <p class="text-sm opacity-75">2022 – Present</p>
+              </div>
+              <span class="tag-unique mt-2 md:mt-0">Current</span>
             </div>
+            <p>
+              <strong>Core:</strong> Cloud Security, Cryptography, Databases,
+              Backend Systems
+            </p>
+          </div>
+
+          <div class="asymmetric-card">
+            <div class="flex items-start">
+              <div
+                class="w-4 h-4 mt-2 mr-4 flex-shrink-0"
+                style="
+                  background: var(--electric);
+                  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                "
+              ></div>
+              <div class="flex-grow">
+                <h3 class="text-xl font-bold">AI & Deep Learning</h3>
+                <p class="font-semibold" style="color: var(--electric)">
+                  Code 213 • Feb – May 2025
+                </p>
+                <p class="text-sm mb-2">RNNs, CNNs, NLP, Generative Models</p>
+                <span class="tag-unique">Certificate Earned</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="asymmetric-card">
+            <div class="flex items-start">
+              <div
+                class="w-4 h-4 mt-2 mr-4 flex-shrink-0"
+                style="
+                  background: var(--coral);
+                  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                "
+              ></div>
+              <div class="flex-grow">
+                <h3 class="text-xl font-bold">AI & Machine Learning</h3>
+                <p class="font-semibold" style="color: var(--electric)">
+                  Code 213 • Oct 2024 – Feb 2025
+                </p>
+                <p class="text-sm mb-2">
+                  ML Foundations, Scikit-Learn, TensorFlow
+                </p>
+                <span class="tag-unique">Certificate Earned</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="asymmetric-card">
+            <div class="flex items-start">
+              <div
+                class="w-4 h-4 mt-2 mr-4 flex-shrink-0"
+                style="
+                  background: var(--electric);
+                  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                "
+              ></div>
+              <div class="flex-grow">
+                <h3 class="text-xl font-bold">
+                  Prompt Engineering & Cloud Computing
+                </h3>
+                <p class="font-semibold" style="color: var(--electric)">
+                  Datacamp • Online
+                </p>
+                <p class="text-sm mb-2">LLM Prompting, AWS/GCP Basics</p>
+                <span class="tag-unique">Certificate Earned</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Skills -->
     <section id="skills" class="py-24 reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black mb-16 text-center">
-                <span class="section-header">Core Competencies</span>
-            </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                <div class="asymmetric-card text-center">
-                    <div class="icon-unique mx-auto mb-4">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">AI/ML</h3>
-                    <p class="text-sm">LLMs, Scikit-Learn, TensorFlow, NLP</p>
-                </div>
-                <div class="asymmetric-card text-center">
-                    <div class="icon-unique mx-auto mb-4">
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">Backend</h3>
-                    <p class="text-sm">Node.js, Express, FastAPI, PostgreSQL</p>
-                </div>
-                <div class="asymmetric-card text-center">
-                    <div class="icon-unique mx-auto mb-4">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">Cybersecurity</h3>
-                    <p class="text-sm">Cryptography, Cloud Security, Protocols</p>
-                </div>
-                <div class="asymmetric-card text-center">
-                    <div class="icon-unique mx-auto mb-4">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">Product</h3>
-                    <p class="text-sm">Agile/Scrum, User Stories, MoSCoW</p>
-                </div>
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-black mb-16 text-center">
+          <span class="section-header">Core Competencies</span>
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div class="asymmetric-card text-center">
+            <div class="icon-unique mx-auto mb-4">
+              <i class="fas fa-brain"></i>
             </div>
+            <h3 class="font-bold text-xl mb-2">AI/ML</h3>
+            <p class="text-sm">LLMs, Scikit-Learn, TensorFlow, NLP</p>
+          </div>
+          <div class="asymmetric-card text-center">
+            <div class="icon-unique mx-auto mb-4">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">Backend</h3>
+            <p class="text-sm">Node.js, Express, FastAPI, PostgreSQL</p>
+          </div>
+          <div class="asymmetric-card text-center">
+            <div class="icon-unique mx-auto mb-4">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">Cybersecurity</h3>
+            <p class="text-sm">Cryptography, Cloud Security, Protocols</p>
+          </div>
+          <div class="asymmetric-card text-center">
+            <div class="icon-unique mx-auto mb-4">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">Product</h3>
+            <p class="text-sm">Agile/Scrum, User Stories, MoSCoW</p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Community -->
     <section id="community" class="diagonal-section reveal">
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-5xl font-black mb-16 text-center">
-                <span class="section-header">Community & Leadership</span>
-            </h2>
+      <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-5xl font-black mb-16 text-center">
+          <span class="section-header">Community & Leadership</span>
+        </h2>
 
-            <div class="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-                <!-- Academic Leadership -->
-                <div class="asymmetric-card">
-                    <div class="flex items-center mb-6">
-                        <div class="icon-unique mr-4">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold">Academic Leadership</h3>
-                            <p class="text-sm opacity-75">PM + Backend Dev</p>
-                        </div>
-                    </div>
-                    <div class="space-y-6">
-                        <div class="relative timeline-unique">
-                            <div class="timeline-dot-unique"></div>
-                            <h4 class="font-bold text-lg mb-1">FikrSight • E-Learning Platform</h4>
-                            <p class="text-sm opacity-75 mb-2">Mar 2024 – May 2025</p>
-                            <p class="text-sm mb-3">Led Agile team while building secure backend with Node.js, Express, Prisma, PostgreSQL. Real-world linear algebra cases with personalized learning paths.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tag-unique">Agile PM</span>
-                                <span class="tag-unique">Backend</span>
-                                <span class="tag-unique">EdTech</span>
-                            </div>
-                        </div>
-                        <div class="relative timeline-unique">
-                            <div class="timeline-dot-unique"></div>
-                            <h4 class="font-bold text-lg mb-1">Cryptographic Security Protocol</h4>
-                            <p class="text-sm opacity-75 mb-2">2024</p>
-                            <p class="text-sm mb-3">Designed enhanced secure channel with AES-GCM, ChaCha20-Poly1305, ECC/ECDH for key exchange, SHA-256/HKDF for key derivation. Implemented rigorous downgrade attack protection with 0% attack success rate in simulations.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tag-unique">AES-GCM</span>
-                                <span class="tag-unique">Protocol Design</span>
-                                <span class="tag-unique">ECC/ECDH</span>
-                            </div>
-                        </div>
-                        <div class="relative timeline-unique">
-                            <div class="timeline-dot-unique"></div>
-                            <h4 class="font-bold text-lg mb-1">Queueing Systems Simulation</h4>
-                            <p class="text-sm opacity-75 mb-2">2024</p>
-                            <p class="text-sm mb-3">Simulated M/M/1 models validating Little's Law with <5% error margin.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tag-unique">OpsResearch</span>
-                                <span class="tag-unique">Simulation</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Community Leadership -->
-                <div class="space-y-6">
-                    <div class="asymmetric-card">
-                        <div class="flex items-center mb-6">
-                            <div class="icon-unique mr-4">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-bold">Community Leadership</h3>
-                                <p class="text-sm opacity-75">AI Education & Innovation</p>
-                            </div>
-                        </div>
-                        <div class="space-y-5">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 flex-shrink-0 mr-4 flex items-center justify-center" style="background: var(--deep); border: 3px solid var(--electric); border-radius: 50%;">
-                                    <i class="fas fa-lightbulb" style="color: var(--electric);"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold">FrAIday Lead</h4>
-                                    <p class="text-sm">Weekly AI article deep-dives with quizzes and peer discussions</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 flex-shrink-0 mr-4 flex items-center justify-center" style="background: var(--deep); border: 3px solid var(--coral); border-radius: 50%;">
-                                    <i class="fas fa-microphone" style="color: var(--coral);"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold">SOAI Host • AI Summit 2025</h4>
-                                    <p class="text-sm">Facilitated technical reading groups and AI news analysis</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 flex-shrink-0 mr-4 flex items-center justify-center" style="background: var(--deep); border: 3px solid var(--electric); border-radius: 50%;">
-                                    <i class="fas fa-trophy" style="color: var(--electric);"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold">Hackathon Winner</h4>
-                                    <p class="text-sm">NEST 2024 • AI Surveillance System (1st Place)</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 flex-shrink-0 mr-4 flex items-center justify-center" style="background: var(--deep); border: 3px solid var(--coral); border-radius: 50%;">
-                                    <i class="fas fa-calendar-check" style="color: var(--coral);"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold">Event Organizer</h4>
-                                    <p class="text-sm">Led Educktech 2024; attended CTO Forum, ICT DAS, AI Summit</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="asymmetric-card">
-                        <div class="flex items-center mb-6">
-                            <div class="icon-unique mr-4">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold">Multilingual Impact</h3>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4">
-                            <div class="lang-badge">
-                                <div class="text-3xl mb-2">🇩🇿</div>
-                                <p class="lang-text text-sm font-bold">Arabic</p>
-                                <p class="text-xs opacity-60" style="color: var(--cream);">Native</p>
-                            </div>
-                            <div class="lang-badge">
-                                <div class="text-3xl mb-2">🇫🇷</div>
-                                <p class="lang-text text-sm font-bold">French</p>
-                                <p class="text-xs opacity-60" style="color: var(--cream);">Professional</p>
-                            </div>
-                            <div class="lang-badge">
-                                <div class="text-3xl mb-2">🇬🇧</div>
-                                <p class="lang-text text-sm font-bold">English</p>
-                                <p class="text-xs opacity-60" style="color: var(--cream);">Professional</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+          <!-- Academic Leadership -->
+          <div class="asymmetric-card">
+            <div class="flex items-center mb-6">
+              <div class="icon-unique mr-4">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold">Academic Leadership</h3>
+                <p class="text-sm opacity-75">PM + Backend Dev</p>
+              </div>
             </div>
+            <div class="space-y-6">
+              <div class="relative timeline-unique">
+                <div class="timeline-dot-unique"></div>
+                <h4 class="font-bold text-lg mb-1">
+                  FikrSight • E-Learning Platform
+                </h4>
+                <p class="text-sm opacity-75 mb-2">Mar 2024 – May 2024</p>
+                <p class="text-sm mb-3">
+                  Led Agile team while building secure backend with Node.js,
+                  Express, Prisma, PostgreSQL. Real-world linear algebra cases
+                  with personalized learning paths.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag-unique">Agile PM</span>
+                  <span class="tag-unique">Backend</span>
+                  <span class="tag-unique">EdTech</span>
+                </div>
+              </div>
+              <div class="relative timeline-unique">
+                <div class="timeline-dot-unique"></div>
+                <h4 class="font-bold text-lg mb-1">
+                  Cryptographic Security Protocol
+                </h4>
+                <p class="text-sm opacity-75 mb-2">2025</p>
+                <p class="text-sm mb-3">
+                  Designed enhanced secure channel with AES-GCM,
+                  ChaCha20-Poly1305, ECC/ECDH for key exchange, SHA-256/HKDF for
+                  key derivation. Implemented rigorous downgrade attack
+                  protection with 0% attack success rate in simulations.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag-unique">AES-GCM</span>
+                  <span class="tag-unique">Protocol Design</span>
+                  <span class="tag-unique">ECC/ECDH</span>
+                </div>
+              </div>
+              <div class="relative timeline-unique">
+                <div class="timeline-dot-unique"></div>
+                <h4 class="font-bold text-lg mb-1">
+                  Queueing Systems Simulation
+                </h4>
+                <p class="text-sm opacity-75 mb-2">2025</p>
+                <p class="text-sm mb-3">
+                  Simulated M/M/1 models validating Little's Law with <5% error
+                  margin.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag-unique">OpsResearch</span>
+                  <span class="tag-unique">Simulation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Community Leadership -->
+          <div class="space-y-6">
+            <div class="asymmetric-card">
+              <div class="flex items-center mb-6">
+                <div class="icon-unique mr-4">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold">Community Leadership</h3>
+                  <p class="text-sm opacity-75">AI Education & Innovation</p>
+                </div>
+              </div>
+              <div class="space-y-5">
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex-shrink-0 mr-4 flex items-center justify-center"
+                    style="
+                      background: var(--deep);
+                      border: 3px solid var(--electric);
+                      border-radius: 50%;
+                    "
+                  >
+                    <i
+                      class="fas fa-lightbulb"
+                      style="color: var(--electric)"
+                    ></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold">FrAIday Lead</h4>
+                    <p class="text-sm">
+                      Weekly AI article deep-dives with quizzes and peer
+                      discussions
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex-shrink-0 mr-4 flex items-center justify-center"
+                    style="
+                      background: var(--deep);
+                      border: 3px solid var(--coral);
+                      border-radius: 50%;
+                    "
+                  >
+                    <i
+                      class="fas fa-microphone"
+                      style="color: var(--coral)"
+                    ></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold">SOAI Host • AI Summit 2025</h4>
+                    <p class="text-sm">
+                      Facilitated technical reading groups and AI news analysis
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex-shrink-0 mr-4 flex items-center justify-center"
+                    style="
+                      background: var(--deep);
+                      border: 3px solid var(--electric);
+                      border-radius: 50%;
+                    "
+                  >
+                    <i class="fas fa-trophy" style="color: var(--electric)"></i>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-12 h-12 flex-shrink-0 mr-4 flex items-center justify-center"
+                    style="
+                      background: var(--deep);
+                      border: 3px solid var(--coral);
+                      border-radius: 50%;
+                    "
+                  >
+                    <i
+                      class="fas fa-calendar-check"
+                      style="color: var(--coral)"
+                    ></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold">Event Organizer</h4>
+                    <p class="text-sm">
+                      organizer in Educktech 2024; attended CTO Forum, ICT DAS,
+                      AI Summit, S2EE-16, Engineers Gala...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="asymmetric-card">
+              <div class="flex items-center mb-6">
+                <div class="icon-unique mr-4">
+                  <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="text-2xl font-bold">Multilingual Impact</h3>
+              </div>
+              <div class="grid grid-cols-3 gap-4">
+                <div class="lang-badge">
+                  <div class="text-3xl mb-2">🇩🇿</div>
+                  <p class="lang-text text-sm font-bold">Arabic</p>
+                  <p class="text-xs opacity-60" style="color: var(--cream)">
+                    Native
+                  </p>
+                </div>
+                <div class="lang-badge">
+                  <div class="text-3xl mb-2">🇫🇷</div>
+                  <p class="lang-text text-sm font-bold">French</p>
+                  <p class="text-xs opacity-60" style="color: var(--cream)">
+                    Professional
+                  </p>
+                </div>
+                <div class="lang-badge">
+                  <div class="text-3xl mb-2">🇬🇧</div>
+                  <p class="lang-text text-sm font-bold">English</p>
+                  <p class="text-xs opacity-60" style="color: var(--cream)">
+                    Professional
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-24 reveal" style="background: var(--deep);">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-5xl font-black mb-8 text-white">
-                Let's Build the <span class="gradient-flow">Future</span>
-            </h2>
-            <p class="text-xl mb-12 opacity-75 max-w-2xl mx-auto" style="color: var(--cream);">
-                Available for AI, backend, product, or cybersecurity roles. Remote-first. Impact-driven.
-            </p>
-            <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
-                <a href="mailto:nawelxbellil@gmail.com" class="btn-brutal inline-flex items-center justify-center">
-                    <i class="fas fa-envelope mr-3"></i> nawelxbellil@gmail.com
-                </a>
-                <a href="https://linkedin.com/in/nawel-bellil-5728902a0" class="btn-brutal btn-brutal-outline inline-flex items-center justify-center">
-                    <i class="fab fa-linkedin mr-3"></i> LinkedIn Profile
-                </a>
-            </div>
-            <p class="opacity-60" style="color: var(--cream);">+213 774 920 634 • Alger, Algeria • Open to Global Opportunities</p>
+    <section id="contact" class="py-24 reveal" style="background: var(--deep)">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-5xl font-black mb-8 text-white">
+          Let's Build the <span class="gradient-flow">Future</span>
+        </h2>
+        <p
+          class="text-xl mb-12 opacity-75 max-w-2xl mx-auto"
+          style="color: var(--cream)"
+        >
+          Available for AI, backend, product, or cybersecurity roles.
+          Remote-first. Impact-driven.
+        </p>
+        <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
+          <a
+            href="mailto:nawelxbellil@gmail.com"
+            class="btn-brutal inline-flex items-center justify-center"
+          >
+            <i class="fas fa-envelope mr-3"></i> nawelxbellil@gmail.com
+          </a>
+          <a
+            href="https://linkedin.com/in/nawel-bellil-5728902a0"
+            class="btn-brutal btn-brutal-outline inline-flex items-center justify-center"
+          >
+            <i class="fab fa-linkedin mr-3"></i> LinkedIn Profile
+          </a>
         </div>
+        <p class="opacity-60" style="color: var(--cream)">
+          +213 774 920 634 • Alger, Algeria • Open to Global Opportunities
+        </p>
+      </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 text-center" style="background: var(--deep); color: var(--cream); border-top: 4px solid var(--electric);">
-        <p class="text-sm">&copy; 2025 Nawel Bellil. <span style="color: var(--electric);">Crafted with purpose.</span></p>
+    <footer
+      class="py-8 text-center"
+      style="
+        background: var(--deep);
+        color: var(--cream);
+        border-top: 4px solid var(--electric);
+      "
+    >
+      <p class="text-sm">
+        &copy; 2025 Nawel Bellil.
+        <span style="color: var(--electric)">Crafted with purpose.</span>
+      </p>
     </footer>
 
     <script>
-        // Scroll Indicator
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercentage = (scrollTop / scrollHeight) * 100;
-            document.getElementById('scrollIndicator').style.width = scrollPercentage + '%';
+      // Scroll Indicator
+      window.addEventListener("scroll", () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrollPercentage = (scrollTop / scrollHeight) * 100;
+        document.getElementById("scrollIndicator").style.width =
+          scrollPercentage + "%";
+      });
+
+      // Reveal animations
+      const revealElements = document.querySelectorAll(".reveal");
+
+      const revealOnScroll = () => {
+        revealElements.forEach((el) => {
+          const elementTop = el.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+
+          if (elementTop < windowHeight * 0.85) {
+            el.classList.add("active");
+          }
         });
+      };
 
-        // Reveal animations
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealOnScroll = () => {
-            revealElements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight * 0.85) {
-                    el.classList.add('active');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Initial check
+      window.addEventListener("scroll", revealOnScroll);
+      revealOnScroll(); // Initial check
     </script>
-</body>
+  </body>
 </html>
